@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace HarryPorter.Project.Interfaces
+namespace HairyPorter.Project.Interfaces
 {
   public interface IItem
   {

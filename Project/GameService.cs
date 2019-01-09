@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using HarryPorter.Project.Interfaces;
-using HarryPorter.Project.Models;
+using HairyPorter.Project.Interfaces;
+using HairyPorter.Project.Models;
 
-namespace HarryPorter.Project
+namespace HairyPorter.Project
 {
   public class GameService : IGameService
   {

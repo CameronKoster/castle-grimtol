@@ -1,13 +1,13 @@
 ﻿using System;
-using HarryPorter.Project;
+using HairyPorter.Project;
 
-namespace HarryPorter
+namespace HairyPorter
 {
   public class Program
   {
     public static void Main(string[] args)
     {
-
+      System.Console.WriteLine("Welcome to Hairy Porter and the Developers Scone!");
     }
   }
 }

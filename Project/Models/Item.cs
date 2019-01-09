@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using HarryPorter.Project.Interfaces;
+using HairyPorter.Project.Interfaces;
 
-namespace HarryPorter.Project.Models
+namespace HairyPorter.Project.Models
 {
   public class Item : IItem
   {
