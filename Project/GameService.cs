@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using CastleGrimtol.Project.Interfaces;
 using CastleGrimtol.Project.Models;
@@ -9,29 +10,70 @@ namespace CastleGrimtol.Project
   {
     public IRoom CurrentRoom { get; set; }
     public Player CurrentPlayer { get; set; }
+    bool playing = true;
 
     public void GetUserInput()
     {
-      //ask what do you want to do?
-      //get userinput and split()
-      //switch statement based on first word of userinput
-      //case "go"
-      //Go(second word)
+      System.Console.WriteLine("Where would you like to do?");
+      string where = Console.ReadLine();
+      string[] whereArr = where.Split(" ");
+      string command = whereArr[0];
+      string value = "";
+      if (whereArr.Length > 1)
+      {
+        value = whereArr[1];
+      }
+      switch (command)
+      {
+        case "look":
+          Look();
+          break;
+        case "go":
+          Go(value);
+          break;
+        case "help":
+          Help();
+          break;
+        case "quit":
+          Quit();
+          break;
+        case "inventory":
+          Inventory();
+          break;
+        case "reset":
+          Reset();
+          break;
+        case "takeItem":
+          TakeItem(itemName);
+          break;
+        case "useItem":
+          UseItem(itemName);
+          break;
+        default:
+          System.Console.WriteLine("Invalid Command");
+          break;
+      }
     }
+
 
     public void Go(string direction)
     {
-      //CurrentRoom.ChangeRoom(direction)
+      if (CurrentRoom.Exits.ContainsKey(direction))
+      {
+        CurrentRoom = CurrentRoom.Exits[direction];
+        Look();
+      };
+      System.Console.WriteLine("NOT A VALID DIRECTION");
     }
 
-    public void Help()
+    public void Help()//need help here
     {
-
+      System.Console.WriteLine($"{CurrentPlayer.commands}");
     }
 
     public void Inventory()
     {
-
+      System.Console.WriteLine($"{CurrentPlayer.Inventory}");
     }
 
     public void Look()
@@ -41,7 +83,7 @@ namespace CastleGrimtol.Project
 
     public void Quit()
     {
-
+      playing = false;
     }
 
     public void Reset()
@@ -60,14 +102,14 @@ namespace CastleGrimtol.Project
       Item intellisense = new Item("Intellisense", "The Developer's Intellisense");
 
       breakroom.Exits.Add("north", lecture);
-      breakroom.Exits.Add("west", "zach");
-      breakroom.Exits.Add("south", "jake");
-      lecture.Exits.Add("south", "breakroom");
-      laboratory.Exits.Add("west", "breakroom");
-      jake.Exits.Add("north", "breakroom");
-      jake.Exits.Add("east", "laboratory");
+      breakroom.Exits.Add("west", zach);
+      breakroom.Exits.Add("south", jake);
+      lecture.Exits.Add("south", breakroom);
+      laboratory.Exits.Add("west", breakroom);
+      jake.Exits.Add("north", breakroom);
+      jake.Exits.Add("east", laboratory);
 
-      // intellisense.Items.Add("Intellisense", "The Developer's Intellisense");
+
       lecture.Items.Add(intellisense);
 
       CurrentRoom = breakroom;
@@ -75,7 +117,18 @@ namespace CastleGrimtol.Project
 
     public void StartGame()
     {
+
+
       Setup();
+
+      while (playing)
+      {
+        if (Exits.ContainsKey(direction))
+        {
+          System.Console.WriteLine($"{CurrentRoom.Description}");
+        }
+      }
+      GetUserInput();
       //while(playing)
       //print room description
       //GetUserInput()
