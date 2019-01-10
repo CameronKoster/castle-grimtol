@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using HairyPorter.Project.Interfaces;
+using CastleGrimtol.Project.Interfaces;
 
-namespace HairyPorter.Project.Models
+namespace CastleGrimtol.Project.Models
 {
   public class Player : IPlayer
   {

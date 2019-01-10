@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using HairyPorter.Project.Models;
+using CastleGrimtol.Project.Models;
 
-namespace HairyPorter.Project.Interfaces
+namespace CastleGrimtol.Project.Interfaces
 {
   public interface IRoom
   {

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using HairyPorter.Project.Models;
+using CastleGrimtol.Project.Models;
+using CastleGrimtol.Project;
 //can't import the service for some reason
 
-namespace HairyPorter
+namespace CastleGrimtol
 {
   public class Program
   {
@@ -17,7 +18,7 @@ namespace HairyPorter
       System.Console.WriteLine("YOU REALIZE YOU DON'T KNOW SYNTAX ANYMORE!!!!!");
       System.Console.WriteLine("Lucky for you Hairy Porter comes in shortly after and explains that you've lost your intellisense!!!");
       System.Console.WriteLine("You must join Hairy on a quest to traverse the dangerous landscape that is the 3rd floor of the Steven's Henegar building to find the Developer's Intellisense.");
-
+      //instantiate a GameService and then envoke StartGame();
 
     }
   }

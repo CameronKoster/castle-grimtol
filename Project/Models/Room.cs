@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using HairyPorter.Project.Interfaces;
-using HairyPorter.Project.Models;
+using CastleGrimtol.Project.Interfaces;
+using CastleGrimtol.Project.Models;
 
-namespace HairyPorter.Project.Models
+namespace CastleGrimtol.Project.Models
 {
   public class Room : IRoom
   {
@@ -31,20 +31,23 @@ namespace HairyPorter.Project.Models
     // }
 
 
-    public Room changeRoom(Room room) //need to import service. Need access to currentRoom so room can change based on user input
+    public Room ChangeRoom(string direction) //need to import service. Need access to currentRoom so room can change based on user input
     {
-      bool playing = true;
-      while (playing)
+      // bool playing = true;
+      // while (playing)
+      // {
+      //   System.Console.Write("Which direction would you like to go?");
+      // string direction = Console.ReadLine();
+
+      if (Exits.ContainsKey(direction))
       {
-        System.Console.Write("Which direction would you like to go?");
-        string direction = Console.ReadLine();
 
-        if (direction == Exits.ContainsKey(key:))
-        { //don't know what to do in the ^^^^^^^parens? Saying "if readline(N,E,S,W) == key in dictionary(N,E,S,W), I can update current room. 
-
-        }
       }
-      return room;
+      // { //don't know what to do in the ^^^^^^^parens? Saying "if readline(N,E,S,W) == key in dictionary(N,E,S,W), I can update current room. 
+
+      // }
+      // }
+      // return room;
     }
 
     public Item takeItem(Item item) //need to import service. Need access to currentRoom so if currentRoom == roomWithItem, you can run this method
@@ -60,7 +63,7 @@ namespace HairyPorter.Project.Models
     {
       Name = name;
       Description = description;
-      Items = new List<Item>(); //not sure if correct. Get help.
+      Items = new List<Item>(); //not sure if correct. Get help. YES CORRECT PW
       Exits = new Dictionary<string, IRoom>(); //not sure if correct. Get help.
     }
 
