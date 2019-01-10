@@ -14,7 +14,7 @@ namespace CastleGrimtol.Project
 
     public void GetUserInput()
     {
-      System.Console.WriteLine("Where would you like to do?");
+      System.Console.WriteLine("What would you like to do?");
       string where = Console.ReadLine();
       string[] whereArr = where.Split(" ");
       string command = whereArr[0];
@@ -43,11 +43,11 @@ namespace CastleGrimtol.Project
         case "reset":
           Reset();
           break;
-        case "takeItem":
-          TakeItem(itemName);
+        case "take":
+          TakeItem(value);
           break;
-        case "useItem":
-          UseItem(itemName);
+        case "use":
+          UseItem(value);
           break;
         default:
           System.Console.WriteLine("Invalid Command");
@@ -56,29 +56,45 @@ namespace CastleGrimtol.Project
     }
 
 
-    public void Go(string direction)
+    public void Go(string key)
     {
-      if (CurrentRoom.Exits.ContainsKey(direction))
+      if (CurrentRoom.Exits.ContainsKey(key))
       {
-        CurrentRoom = CurrentRoom.Exits[direction];
+        CurrentRoom = CurrentRoom.Exits[key];
         Look();
-      };
-      System.Console.WriteLine("NOT A VALID DIRECTION");
+      }
+      else
+      {
+        System.Console.WriteLine("NOT A VALID DIRECTION");
+      }
     }
 
-    public void Help()//need help here
+    public void Help()
     {
-      System.Console.WriteLine($"{CurrentPlayer.commands}");
+      System.Console.WriteLine("For a description of your current location, type 'look'");
+      System.Console.WriteLine("To move into another room, type 'go', followed by a direction, such as 'north'");
+      System.Console.WriteLine("For a list of useable commands, type 'help'");
+      System.Console.WriteLine("To quit the game, type 'quit'");
+      System.Console.WriteLine("To see current items in your inventory, type 'inventory'");
+      System.Console.WriteLine("To return to the start of the game, type 'reset'");
+      System.Console.WriteLine("To take an item from a room, type 'take item'");
+      System.Console.WriteLine("To use an item from your inventory, type 'use item'");
     }
 
     public void Inventory()
     {
-      System.Console.WriteLine($"{CurrentPlayer.Inventory}");
+      foreach (var item in CurrentPlayer.Inventory)
+      {
+        System.Console.WriteLine($"{CurrentPlayer.Inventory}");
+      }
     }
 
     public void Look()
     {
-      System.Console.WriteLine($"{CurrentRoom.Description}");
+      foreach (var room in CurrentRoom.Description)
+      {
+        System.Console.WriteLine($"{CurrentRoom.Description}");
+      }
     }
 
     public void Quit()
@@ -88,7 +104,7 @@ namespace CastleGrimtol.Project
 
     public void Reset()
     {
-
+      Setup();
     }
 
     public void Setup()
@@ -113,35 +129,44 @@ namespace CastleGrimtol.Project
       lecture.Items.Add(intellisense);
 
       CurrentRoom = breakroom;
+      System.Console.Write("Please enter name:");
+      string playerName = Console.ReadLine();
+      CurrentPlayer = new Player(playerName);
     }
 
     public void StartGame()
     {
-
-
       Setup();
-
-      while (playing)
-      {
-        if (Exits.ContainsKey(direction))
-        {
-          System.Console.WriteLine($"{CurrentRoom.Description}");
-        }
-      }
       GetUserInput();
-      //while(playing)
-      //print room description
-      //GetUserInput()
     }
 
     public void TakeItem(string itemName)
     {
+      Item foundItem = CurrentRoom.Items.Find(item => item.Name == itemName);
+      if (foundItem == null)
+      {
+        System.Console.WriteLine("No item found");
+      }
+      else
+      {
+        CurrentRoom.Items.Remove(foundItem);
+        CurrentPlayer.Inventory.Add(foundItem);
+        Inventory();
+      }
+    }
+
+    public void UseItem(string Item)
+    {
 
     }
 
-    public void UseItem(string itemName)
+    public void Play()
     {
+      Setup();
+      while (playing)
+      {
 
+      }
     }
     public GameService()
     {

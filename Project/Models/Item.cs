@@ -11,6 +11,7 @@ namespace CastleGrimtol.Project.Models
     {
       Name = name;
       Description = description;
+
     }
   }
 }
