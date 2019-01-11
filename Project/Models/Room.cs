@@ -13,7 +13,7 @@ namespace CastleGrimtol.Project.Models
     public string Description { get; set; }
     public List<Item> Items { get; set; }
     public Dictionary<string, IRoom> Exits { get; set; }
-
+    public bool Winnable { get; set; }
 
     public Room(string name, string description) //does this need List<Items>, Dictionary<Exits>???
     {
@@ -21,6 +21,7 @@ namespace CastleGrimtol.Project.Models
       Description = description;
       Items = new List<Item>();
       Exits = new Dictionary<string, IRoom>();
+      Winnable = false;
     }
 
 

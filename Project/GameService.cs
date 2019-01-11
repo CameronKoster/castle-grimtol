@@ -10,12 +10,12 @@ namespace CastleGrimtol.Project
   {
     public IRoom CurrentRoom { get; set; }
     public Player CurrentPlayer { get; set; }
-    bool playing = true;
+    private bool Playing = true;
 
     public void GetUserInput()
     {
       System.Console.WriteLine("What would you like to do?");
-      string where = Console.ReadLine();
+      string where = Console.ReadLine().ToLower();
       string[] whereArr = where.Split(" ");
       string command = whereArr[0];
       string value = "";
@@ -55,7 +55,6 @@ namespace CastleGrimtol.Project
       }
     }
 
-
     public void Go(string key)
     {
       if (CurrentRoom.Exits.ContainsKey(key))
@@ -85,21 +84,18 @@ namespace CastleGrimtol.Project
     {
       foreach (var item in CurrentPlayer.Inventory)
       {
-        System.Console.WriteLine($"{CurrentPlayer.Inventory}");
+        System.Console.WriteLine($"{item.Name}");
       }
     }
 
     public void Look()
     {
-      foreach (var room in CurrentRoom.Description)
-      {
-        System.Console.WriteLine($"{CurrentRoom.Description}");
-      }
+      System.Console.WriteLine($"{CurrentRoom.Description}");
     }
 
     public void Quit()
     {
-      playing = false;
+      Playing = false;
     }
 
     public void Reset()
@@ -115,7 +111,7 @@ namespace CastleGrimtol.Project
       Room jake = new Room("Jake's Office", "Jake's Office");
       Room zach = new Room("Zach's Office", "Zach's Office");
 
-      Item intellisense = new Item("Intellisense", "The Developer's Intellisense");
+      Item intellisense = new Item("intellisense", "The Developer's Intellisense");
 
       breakroom.Exits.Add("north", lecture);
       breakroom.Exits.Add("west", zach);
@@ -137,7 +133,17 @@ namespace CastleGrimtol.Project
     public void StartGame()
     {
       Setup();
-      GetUserInput();
+      Look();
+      while (Playing)
+      {
+        if (CurrentRoom.Name == "Zach's Office")
+        {
+          System.Console.WriteLine("You lose");
+          break;
+        }
+        //check if the CurrentRoom.winnable is true and if so implement you won logic
+        GetUserInput();
+      }
     }
 
     public void TakeItem(string itemName)
@@ -155,19 +161,24 @@ namespace CastleGrimtol.Project
       }
     }
 
-    public void UseItem(string Item)
+    public void UseItem(string itemName)
     {
-
-    }
-
-    public void Play()
-    {
-      Setup();
-      while (playing)
+      Item itemToUse = CurrentPlayer.Inventory.Find(item => item.Name == itemName);
+      if (itemToUse == null)
       {
-
+        System.Console.WriteLine("Must use item");
       }
+      else if (CurrentRoom.Name == "Laboratory" && itemToUse.Name == "intellisense")
+      {
+        CurrentRoom.Winnable = true;
+        System.Console.WriteLine("CodeWorksdor wins the house cup!!!");
+      }
+      //find the item in the players inventory with the itemName
+      //null check
+      //if using intellisense and in the lab then switch the bool winnable to true
+
     }
+
     public GameService()
     {
 
